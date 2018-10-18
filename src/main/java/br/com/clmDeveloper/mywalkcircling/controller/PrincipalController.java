@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class IndexController {
+public class PrincipalController {
 	
-	    @GetMapping("/index")
+	    @GetMapping("/principal")
 	    public String greeting(Model model) {
 	        model.addAttribute("nome", "Cleverson Machado");
-	        return "index";
+	        return "principal";
 	    }
 
 }
