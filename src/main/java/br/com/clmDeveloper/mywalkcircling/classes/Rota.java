@@ -26,7 +26,7 @@ public class Rota {
 	private String email;
 	private Double distancia;	
 	
-	@OneToMany(mappedBy = "rota", targetEntity = Ponto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@OneToMany(mappedBy = "rota", targetEntity = Ponto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Ponto> pontos;
 
 	
