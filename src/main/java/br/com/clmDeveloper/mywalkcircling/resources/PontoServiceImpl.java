@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.clmDeveloper.mywalkcircling.classes.Ponto;
 import br.com.clmDeveloper.mywalkcircling.classes.Rota;
 import br.com.clmDeveloper.mywalkcircling.repository.PontoRepository;
-
+/*
 @Service
 @RestController
-@RequestMapping("/pontos")
-public class PontoServiceImpl implements PontoService{
-
+@RequestMapping("/pontos")*/
+public class PontoServiceImpl { //implements PontoService{
+/*
 	@Autowired
 	private PontoRepository pontoRepository;
 	
@@ -55,5 +55,5 @@ public class PontoServiceImpl implements PontoService{
 	public List<Ponto> findPontosByRota(String email, Rota rota) {		
 		return pontoRepository.findPontobyRota(email, rota);
 	}
-
+*/
 }
