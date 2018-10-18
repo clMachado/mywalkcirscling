@@ -8,7 +8,9 @@
     <script th:src="@{/js/bootstrap-select.min.js}"></script>
 
     <script th:inline="javascript">
+
         function showDialog(title, result) {
+
             BootstrapDialog.show({
                 type: BootstrapDialog.TYPE_PRIMARY,
                 title: title,
@@ -22,9 +24,12 @@
                     }
                 }]
             })
+
         }
+
         function likePost(postId) {
             var currentUser = [[${currentUser}]];
+
             if (currentUser) {
                 $.getJSON('/json/posts/post/like/' + postId, postId, function (data) {
                     $('#output-' + postId).html(function (i, val) {
@@ -36,8 +41,23 @@
                 showDialog("Please Login", "You must be logged-in to like posts.");
             }
         }
+
     </script>
 
 </div>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
