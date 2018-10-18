@@ -19,13 +19,9 @@ public class Rota {
 	
 	@Valid
 	private String descricao;
-	private Double distancia;
-	
-	//@ManyToOne(fetch=FetchType.LAZY)
-	//private Usuario user;
-	
+	@Valid
 	private String proprietario;
-
+	private Double distancia;	
 
 	public Rota(Long iD, String descricao, Double distancia, String proprietario) {
 		super();
