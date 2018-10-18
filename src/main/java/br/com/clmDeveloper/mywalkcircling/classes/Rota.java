@@ -1,11 +1,14 @@
 package br.com.clmDeveloper.mywalkcircling.classes;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.Valid;
 
@@ -20,18 +23,34 @@ public class Rota {
 	@Valid
 	private String descricao;
 	@Valid
-	private String proprietario;
+	private String email;
 	private Double distancia;	
+	
+	@OneToMany(mappedBy = "rota", targetEntity = Ponto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Ponto> pontos;
 
-	public Rota(Long iD, String descricao, Double distancia, String proprietario) {
+	
+	public Rota(Long iD, String descricao, Double distancia, String email) {
 		super();
 		ID = iD;
 		this.descricao = descricao;
 		this.distancia = distancia;
-		this.proprietario = proprietario;
+		this.email = email;
 	}
+	
+	public Rota(Long iD, String descricao, Double distancia, String email, List<Ponto> pontos) {
+		super();
+		ID = iD;
+		this.descricao = descricao;
+		this.distancia = distancia;
+		this.email = email;
+		this.pontos = pontos;
+	}
+
 	public Rota() {
 	}
+	
+	
 	public Long getID() {
 		return ID;
 	}
@@ -50,12 +69,21 @@ public class Rota {
 	public void setDistancia(Double distancia) {
 		this.distancia = distancia;
 	}
-	public String getProprietario() {
-		return proprietario;
+	public String getEmail() {
+		return email;
 	}
-	public void setProprietario(String proprietario) {
-		this.proprietario = proprietario;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+	
+	public List<Ponto> getPontos() {
+		return pontos;
+	}
+	public void setPontos(List<Ponto> pontos) {
+		this.pontos = pontos;
+	}
+	
+	
 		
 	
 }

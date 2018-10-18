@@ -25,7 +25,7 @@ public class RotaServiceImpl implements RotaService{
 	private RotaRepository rotaRepository;
 
 	@Override
-	@RequestMapping("/add")
+	@RequestMapping("/addRota")
 	@PostMapping(produces="application/json")
 	public Rota CriarRota(@RequestBody @Valid Rota rota) {
 		return rotaRepository.save(rota);
@@ -33,7 +33,7 @@ public class RotaServiceImpl implements RotaService{
 
 	@Override
 	@GetMapping(produces="application/json")
-	@RequestMapping("/{email}")
+	@RequestMapping("/{email}/getRotas")
 	public List<Rota> findAllRotas(@PathVariable String email) {
 		return rotaRepository.findAllRotas(email);
 	}
