@@ -1,10 +1,5 @@
 package br.com.clmDeveloper.mywalkcircling.resources;
 
-import java.util.List;
-
-
-import br.com.clmDeveloper.mywalkcircling.classes.Ponto;
-import br.com.clmDeveloper.mywalkcircling.classes.Rota;
 
 
 public interface PontoService {
