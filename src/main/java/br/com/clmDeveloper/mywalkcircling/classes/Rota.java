@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.Valid;
 
 @Entity
 public class Rota {
@@ -16,6 +17,7 @@ public class Rota {
 	@GeneratedValue(generator = "rota_seq", strategy = GenerationType.SEQUENCE)
 	private Long ID;	
 	
+	@Valid
 	private String descricao;
 	private Double distancia;
 	
