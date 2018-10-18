@@ -1,16 +1,14 @@
 package br.com.clmDeveloper.mywalkcircling.classes;
 
-import java.util.List;
 
-import javax.persistence.CascadeType;
+
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Rota {
@@ -20,14 +18,14 @@ public class Rota {
 	@GeneratedValue(generator = "rota_seq", strategy = GenerationType.SEQUENCE)
 	private Long ID;	
 	
-	@Valid
+	@NotBlank
 	private String descricao;
-	@Valid
+	@NotBlank
 	private String email;
 	private Double distancia;	
 	
 	//@OneToMany(mappedBy = "rota", targetEntity = Ponto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Ponto> pontos;
+	//private List<Ponto> pontos;
 
 	
 	public Rota(Long iD, String descricao, Double distancia, String email) {
@@ -37,7 +35,7 @@ public class Rota {
 		this.distancia = distancia;
 		this.email = email;
 	}
-	
+	/*
 	public Rota(Long iD, String descricao, Double distancia, String email, List<Ponto> pontos) {
 		super();
 		ID = iD;
@@ -46,7 +44,7 @@ public class Rota {
 		this.email = email;
 		this.pontos = pontos;
 	}
-
+*/
 	public Rota() {
 	}
 	
@@ -76,14 +74,14 @@ public class Rota {
 		this.email = email;
 	}
 	
-	public List<Ponto> getPontos() {
+/*	public List<Ponto> getPontos() {
 		return pontos;
 	}
 	public void setPontos(List<Ponto> pontos) {
 		this.pontos = pontos;
 	}
 	
-	
+	*/
 		
 	
 }

@@ -1,32 +1,24 @@
 package br.com.clmDeveloper.mywalkcircling.classes;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
-import org.springframework.data.annotation.Id;
-
-@Entity
+//@Entity
 public class Ponto {
-	
+	/*
 	@Id
 	@SequenceGenerator(name = "ponto_seq", sequenceName = "ponto_seq")
 	@GeneratedValue(generator = "ponto_seq", strategy = GenerationType.SEQUENCE)
 	private Long ID;	
 	
-	@Valid
+	@NotBlank
 	private String latitude;
-	@Valid
+	@NotBlank
 	private String longitude;
 	private String altitude;
 	private Double velocidade;
-	@Valid
+	@NotBlank
 	private String email;
-	@Valid
+	@NotBlank
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Rota rota;
 	
@@ -102,7 +94,7 @@ public class Ponto {
 	}
 	
 	
-	
+	*/
 	
 
 }
