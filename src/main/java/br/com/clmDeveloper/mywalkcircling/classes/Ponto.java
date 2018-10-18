@@ -28,7 +28,7 @@ public class Ponto {
 	private String email;
 	@Valid
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Rota Rota;
+	private Rota rota;
 	
 	public Ponto() {
 		super();
@@ -42,7 +42,7 @@ public class Ponto {
 		this.altitude = altitude;
 		this.velocidade = velocidade;
 		this.email = email;
-		Rota = rota;
+		this.rota = rota;
 	}
 
 	public Long getID() {
@@ -94,11 +94,11 @@ public class Ponto {
 	}
 
 	public Rota getRota() {
-		return Rota;
+		return rota;
 	}
 
 	public void setRota(Rota rota) {
-		Rota = rota;
+		rota = rota;
 	}
 	
 	
