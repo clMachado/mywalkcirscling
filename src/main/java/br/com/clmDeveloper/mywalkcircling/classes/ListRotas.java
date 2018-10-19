@@ -12,6 +12,7 @@ public class ListRotas implements Serializable{
 	
 	
 	private List<Rota> rotas;
+	private String msg;
 
 	public List<Rota> getRotas() {
 		return rotas;
@@ -29,6 +30,20 @@ public class ListRotas implements Serializable{
 	public ListRotas() {
 		super();
 	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+	
+	public void addRota(Rota rota) {
+		this.rotas.add(rota);
+	}
+	
+	
 	
 	
 

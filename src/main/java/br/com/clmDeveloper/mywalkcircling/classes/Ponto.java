@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 public class Ponto {
@@ -20,8 +19,8 @@ public class Ponto {
 	private String longitude;
 	private String altitude;
 	private Double velocidade;
-	@NotBlank
-	@ManyToOne(fetch = FetchType.LAZY)
+
+	@OneToOne(fetch=FetchType.LAZY)
 	private Rota rota;
 	
 	public Ponto() {

@@ -1,16 +1,15 @@
 package br.com.clmDeveloper.mywalkcircling.resources;
 
-import java.util.List;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.clmDeveloper.mywalkcircling.classes.ListPontos;
 import br.com.clmDeveloper.mywalkcircling.classes.Ponto;
 import br.com.clmDeveloper.mywalkcircling.classes.Rota;
 import br.com.clmDeveloper.mywalkcircling.repository.PontoRepository;
+import br.com.clmDeveloper.mywalkcircling.repository.RotaRepository;
 import org.springframework.web.bind.annotation.*;
 
 @Service
@@ -21,45 +20,74 @@ public class PontoServiceImpl implements PontoService{
 	@Autowired
 	private PontoRepository pontoRepository;
 	
+	@Autowired
+	private RotaRepository rotaRepository;
+	
+	private ListPontos listPontos = null;
+	
 	@Override
 	@Transactional
 	@RequestMapping("/addPonto")
 	@PostMapping(produces="application/json")
-	public Ponto CriarPonto(@RequestBody @Valid Ponto ponto) {
-		return pontoRepository.save(ponto);
+	public ListPontos CriarPonto(@RequestBody @Valid Ponto ponto) {
+		listPontos = new ListPontos();
+		
+		listPontos.addPonto(pontoRepository.save(ponto));		
+		return listPontos;
 	}
 	
 	@Override
 	@Transactional
 	@RequestMapping("/addPontos")
 	@PostMapping(produces="application/json")
-	public String CriarPontos(@RequestBody @Valid ListPontos pontos) {
+	public ListPontos CriarPontos(@RequestBody @Valid ListPontos pontos) {
 
+		listPontos = new ListPontos();
+		
 		try {
 			for (Ponto ponto : pontos.getPontos()) {
-				CriarPonto(ponto);			
+				CriarPonto(ponto);
+				listPontos.addPonto(ponto);
 			}		
-			return "sucesso";
+			listPontos.setMsg("sucesso");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return e.toString();
-		}
+			listPontos.setMsg(e.toString());
+		}	
 		
+		return listPontos;
 	}
 	
 	
 	@Override
-	@Transactional
-	@PostMapping(produces="application/json")
-	@RequestMapping("/getPontos")
-	public List<Ponto> findPontosByRota(@RequestBody @Valid Rota rota) {	
+	@GetMapping(produces="application/json")
+	@RequestMapping("/getPontos/{id_rota}")
+	public ListPontos findPontosByRota(@PathVariable Long id_rota) {	
 		
-		//List<Ponto> lp = 
-				return pontoRepository.findPontobyRota(rota);
-//		if (lp == null)
-//			lp = new ArrayList();
-//		return lp;
+		listPontos = new ListPontos();
+		
+		System.out.println("VEIO ID " + id_rota);
+		Rota rota = null;
+		
+		//Long id_rota = Long.parseLong(sid_rota);
+        try {
+		   rota = rotaRepository.findByID(id_rota);
+        }catch (Exception e) {
+			listPontos.setMsg(e.toString());
+			return listPontos;
+		}
+        
+		if (rota == null) {
+			listPontos.setMsg("Nenhuma Rota localizada para o ID informado. (" + id_rota + ")");
+		}
+		else
+		   listPontos.setPontos(pontoRepository.findPontobyRota(rota));
+		
+		if (listPontos.getPontos().toString() == "[]")
+		   listPontos.setMsg("Rota Sem nenhum ponto vinculado!!");
+		
+		return listPontos;
 	}
 
 }

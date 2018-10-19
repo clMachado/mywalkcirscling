@@ -1,7 +1,5 @@
 package br.com.clmDeveloper.mywalkcircling.resources;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,37 +21,54 @@ public class RotaServiceImpl implements RotaService{
 	
 	@Autowired
 	private RotaRepository rotaRepository;
+	
+	private ListRotas listRotas = null;
+	
+	
 
 	@Override
 	@RequestMapping("/addRota")
 	@PostMapping(produces="application/json")
-	public Rota CriarRota(@RequestBody @Valid Rota rota) {
-		return rotaRepository.save(rota);
+	public ListRotas CriarRota(@RequestBody @Valid Rota rota) {
+		listRotas = new ListRotas();
+		
+		listRotas.addRota(rotaRepository.save(rota));
+		
+		return listRotas;
 	}
 	
 	@Override
 	@RequestMapping("/addRotas")
 	@PostMapping(produces="application/json")
-	public String CriarRotas(@RequestBody @Valid ListRotas rotas) {
-
+	public ListRotas CriarRotas(@RequestBody @Valid ListRotas rotas) {
+		listRotas = new ListRotas(); 
 		try {
 			for (Rota rota : rotas.getRotas()) {
-				CriarRota(rota);			
+				CriarRota(rota);
+				listRotas.addRota(rota);
 			}		
-			return "sucesso";
+			
+			listRotas.setMsg("sucesso");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return e.toString();
+			listRotas.setMsg(e.toString());
 		}
-		//return false;
+		
+		return listRotas;
 	}
 
 	@Override
 	@GetMapping(produces="application/json")
 	@RequestMapping("/{email}/getRotas")
-	public List<Rota> findAllRotas(@PathVariable String email) {
-		return rotaRepository.findAllRotas(email);
+	public ListRotas findAllRotas(@PathVariable String email) {
+		listRotas = new ListRotas();
+		listRotas.setRotas(rotaRepository.findAllRotas(email));
+		
+		if (listRotas.getRotas().toString() == "[]")
+			listRotas.setMsg("Nenhuma Rota vinculada ao email " + email + ".");
+		
+		return listRotas;
 	}
 
 }

@@ -10,10 +10,10 @@ import br.com.clmDeveloper.mywalkcircling.classes.Rota;
 
 public interface PontoService {
 	
-	Ponto CriarPonto(Ponto ponto);
+	ListPontos CriarPonto(Ponto ponto);
 	
-	String CriarPontos(ListPontos pontos);
+	ListPontos CriarPontos(ListPontos pontos);
 	
-	List<Ponto> findPontosByRota(Rota rota);
+	ListPontos findPontosByRota(Long sid_rota);
 
 }
