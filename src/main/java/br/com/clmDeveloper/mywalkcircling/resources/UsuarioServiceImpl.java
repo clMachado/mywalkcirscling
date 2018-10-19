@@ -16,7 +16,7 @@ import br.com.clmDeveloper.mywalkcircling.repository.UsuarioRepository;
 
 @RestController
 @Service
-@RequestMapping("/usuario")
+@RequestMapping("/reposit/usuario")
 public class UsuarioServiceImpl implements UsuarioService{
 	
 	@Autowired

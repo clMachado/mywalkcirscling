@@ -1,11 +1,21 @@
 package br.com.clmDeveloper.mywalkcircling.resources;
 
-/*
+import java.util.ArrayList;
+import java.util.List;
+import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import br.com.clmDeveloper.mywalkcircling.classes.Ponto;
+import br.com.clmDeveloper.mywalkcircling.classes.Rota;
+import br.com.clmDeveloper.mywalkcircling.repository.PontoRepository;
+import org.springframework.web.bind.annotation.*;
+
 @Service
 @RestController
-@RequestMapping("/pontos")*/
-public class PontoServiceImpl { //implements PontoService{
-/*
+@RequestMapping("/reposit/pontos")
+public class PontoServiceImpl implements PontoService{
+
 	@Autowired
 	private PontoRepository pontoRepository;
 	
@@ -36,8 +46,12 @@ public class PontoServiceImpl { //implements PontoService{
 	@Override
 	@GetMapping(produces="application/json")
 	@RequestMapping("/getPontos")
-	public List<Ponto> findPontosByRota(String email, Rota rota) {		
-		return pontoRepository.findPontobyRota(email, rota);
+	public List<Ponto> findPontosByRota(Rota rota) {	
+		
+		List<Ponto> lp = pontoRepository.findPontobyRota(rota);
+		if (lp == null)
+			lp = new ArrayList();
+		return lp;
 	}
-*/
+
 }

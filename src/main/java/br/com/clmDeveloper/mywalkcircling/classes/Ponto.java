@@ -1,10 +1,12 @@
 package br.com.clmDeveloper.mywalkcircling.classes;
 
+import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
-//@Entity
+@Entity
 public class Ponto {
-	/*
+	
 	@Id
 	@SequenceGenerator(name = "ponto_seq", sequenceName = "ponto_seq")
 	@GeneratedValue(generator = "ponto_seq", strategy = GenerationType.SEQUENCE)
@@ -17,8 +19,6 @@ public class Ponto {
 	private String altitude;
 	private Double velocidade;
 	@NotBlank
-	private String email;
-	@NotBlank
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Rota rota;
 	
@@ -27,13 +27,12 @@ public class Ponto {
 	}
 
 	public Ponto(@Valid String latitude, @Valid String longitude, String altitude, Double velocidade,
-			@Valid String email, br.com.clmDeveloper.mywalkcircling.classes.@Valid Rota rota) {
+		 br.com.clmDeveloper.mywalkcircling.classes.@Valid Rota rota) {
 		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.altitude = altitude;
 		this.velocidade = velocidade;
-		this.email = email;
 		this.rota = rota;
 	}
 
@@ -77,24 +76,16 @@ public class Ponto {
 		this.velocidade = velocidade;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public Rota getRota() {
 		return rota;
 	}
 
 	public void setRota(Rota rota) {
-		rota = rota;
+		this.rota = rota;
 	}
 	
 	
-	*/
+	
 	
 
 }

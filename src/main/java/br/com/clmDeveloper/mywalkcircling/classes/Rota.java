@@ -1,13 +1,7 @@
 package br.com.clmDeveloper.mywalkcircling.classes;
 
-
-
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import java.util.List;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -24,8 +18,8 @@ public class Rota {
 	private String email;
 	private Double distancia;	
 	
-	//@OneToMany(mappedBy = "rota", targetEntity = Ponto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	//private List<Ponto> pontos;
+	@OneToMany(mappedBy = "rota", targetEntity = Ponto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Ponto> pontos;
 
 	
 	public Rota(Long iD, String descricao, Double distancia, String email) {
@@ -35,7 +29,7 @@ public class Rota {
 		this.distancia = distancia;
 		this.email = email;
 	}
-	/*
+	
 	public Rota(Long iD, String descricao, Double distancia, String email, List<Ponto> pontos) {
 		super();
 		ID = iD;
@@ -44,7 +38,7 @@ public class Rota {
 		this.email = email;
 		this.pontos = pontos;
 	}
-*/
+
 	public Rota() {
 	}
 	
@@ -74,14 +68,11 @@ public class Rota {
 		this.email = email;
 	}
 	
-/*	public List<Ponto> getPontos() {
+	public List<Ponto> getPontos() {
 		return pontos;
 	}
 	public void setPontos(List<Ponto> pontos) {
 		this.pontos = pontos;
 	}
-	
-	*/
-		
 	
 }

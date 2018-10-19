@@ -18,7 +18,7 @@ import br.com.clmDeveloper.mywalkcircling.repository.RotaRepository;
 
 @Service
 @RestController
-@RequestMapping("/rota")
+@RequestMapping("/reposit/rota")
 public class RotaServiceImpl implements RotaService{
 	
 	@Autowired
