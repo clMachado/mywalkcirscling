@@ -34,18 +34,19 @@ public class RotaServiceImpl implements RotaService{
 	@Override
 	@RequestMapping("/addRotas")
 	@PostMapping(produces="application/json")
-	public Boolean CriarRotas(@RequestBody @Valid ListRotas rotas) {
+	public String CriarRotas(@RequestBody @Valid ListRotas rotas) {
 
 		try {
 			for (Rota rota : rotas.getRotas()) {
 				CriarRota(rota);			
 			}		
-			return true;
+			return "sucesso";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			return e.getMessage();
 		}
-		return false;
+		//return false;
 	}
 
 	@Override

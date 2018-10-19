@@ -29,18 +29,19 @@ public class PontoServiceImpl implements PontoService{
 	@Override
 	@RequestMapping("/addPontos")
 	@PostMapping(produces="application/json")
-	public boolean CriarPontos(@RequestBody @Valid ListPontos pontos) {
+	public String CriarPontos(@RequestBody @Valid ListPontos pontos) {
 
 		try {
 			for (Ponto ponto : pontos.getPontos()) {
 				CriarPonto(ponto);			
 			}		
-			return true;
+			return "sucesso";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			return e.getMessage();
 		}
-		return false;
+		
 	}
 	
 	

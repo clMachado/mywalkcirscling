@@ -12,7 +12,7 @@ public interface PontoService {
 	
 	Ponto CriarPonto(Ponto ponto);
 	
-	boolean CriarPontos(ListPontos pontos);
+	String CriarPontos(ListPontos pontos);
 	
 	List<Ponto> findPontosByRota(Rota rota);
 

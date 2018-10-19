@@ -10,7 +10,7 @@ public interface RotaService {
 	
 	Rota CriarRota(Rota rota);
 	
-	Boolean CriarRotas(ListRotas rotas);
+	String CriarRotas(ListRotas rotas);
 	
 	List<Rota> findAllRotas(String email);
 
