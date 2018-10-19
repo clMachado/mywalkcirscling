@@ -48,7 +48,7 @@ public class PontoServiceImpl implements PontoService{
 			for (Ponto ponto : pontos.getPontos()) {
 				listPontos.addPonto(pontoRepository.save(ponto));
 			}		
-			listPontos.setMsg("sucesso");
+			listPontos.setMsg("sucesso"); 
 			
 		} catch (Exception e) {
 			e.printStackTrace();
