@@ -1,6 +1,8 @@
 package br.com.clmDeveloper.mywalkcircling.resources;
 
 import java.util.List;
+
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ public class PontoServiceImpl implements PontoService{
 	private PontoRepository pontoRepository;
 	
 	@Override
+	@Transactional
 	@RequestMapping("/addPonto")
 	@PostMapping(produces="application/json")
 	public Ponto CriarPonto(@RequestBody @Valid Ponto ponto) {
@@ -27,6 +30,7 @@ public class PontoServiceImpl implements PontoService{
 	}
 	
 	@Override
+	@Transactional
 	@RequestMapping("/addPontos")
 	@PostMapping(produces="application/json")
 	public String CriarPontos(@RequestBody @Valid ListPontos pontos) {
@@ -46,6 +50,7 @@ public class PontoServiceImpl implements PontoService{
 	
 	
 	@Override
+	@Transactional
 	@PostMapping(produces="application/json")
 	@RequestMapping("/getPontos")
 	public List<Ponto> findPontosByRota(@RequestBody @Valid Rota rota) {	
