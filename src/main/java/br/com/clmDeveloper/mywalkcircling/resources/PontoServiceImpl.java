@@ -3,9 +3,18 @@ package br.com.clmDeveloper.mywalkcircling.resources;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
+
+import org.json.JSONArray;
+import org.springframework.asm.TypeReference;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+
+import br.com.clmDeveloper.mywalkcircling.classes.ListPontos;
+import br.com.clmDeveloper.mywalkcircling.classes.ListRotas;
 import br.com.clmDeveloper.mywalkcircling.classes.Ponto;
 import br.com.clmDeveloper.mywalkcircling.classes.Rota;
 import br.com.clmDeveloper.mywalkcircling.repository.PontoRepository;
@@ -29,9 +38,10 @@ public class PontoServiceImpl implements PontoService{
 	@Override
 	@RequestMapping("/addPontos")
 	@PostMapping(produces="application/json")
-	public boolean CriarPontos(@RequestBody @Valid List<Ponto> pontos) {
+	public boolean CriarPontos(@RequestBody @Valid ListPontos pontos) {
+
 		try {
-			for (Ponto ponto : pontos) {
+			for (Ponto ponto : pontos.getPontos()) {
 				CriarPonto(ponto);			
 			}		
 			return true;

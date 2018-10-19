@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.clmDeveloper.mywalkcircling.classes.ListPontos;
+import br.com.clmDeveloper.mywalkcircling.classes.ListRotas;
+import br.com.clmDeveloper.mywalkcircling.classes.Ponto;
 import br.com.clmDeveloper.mywalkcircling.classes.Rota;
 import br.com.clmDeveloper.mywalkcircling.repository.RotaRepository;
 
@@ -29,6 +32,23 @@ public class RotaServiceImpl implements RotaService{
 	@PostMapping(produces="application/json")
 	public Rota CriarRota(@RequestBody @Valid Rota rota) {
 		return rotaRepository.save(rota);
+	}
+	
+	@Override
+	@RequestMapping("/addRotas")
+	@PostMapping(produces="application/json")
+	public Boolean CriarRotas(@RequestBody @Valid ListRotas rotas) {
+
+		try {
+			for (Rota rota : rotas.getRotas()) {
+				CriarRota(rota);			
+			}		
+			return true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	@Override

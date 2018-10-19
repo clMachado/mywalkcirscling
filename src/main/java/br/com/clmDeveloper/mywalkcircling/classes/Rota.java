@@ -4,6 +4,8 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 public class Rota {
 	
@@ -18,6 +20,7 @@ public class Rota {
 	private String email;
 	private Double distancia;	
 	
+	@JsonSerialize
 	@OneToMany(mappedBy = "rota", targetEntity = Ponto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Ponto> pontos;
 

@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 public class Ponto {
 	
@@ -20,6 +22,7 @@ public class Ponto {
 	private Double velocidade;
 	@NotBlank
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonSerialize
 	private Rota rota;
 	
 	public Ponto() {
@@ -27,7 +30,7 @@ public class Ponto {
 	}
 
 	public Ponto(@Valid String latitude, @Valid String longitude, String altitude, Double velocidade,
-		 br.com.clmDeveloper.mywalkcircling.classes.@Valid Rota rota) {
+		@Valid Rota rota) {
 		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
