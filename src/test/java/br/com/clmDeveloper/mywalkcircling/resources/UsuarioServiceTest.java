@@ -59,7 +59,7 @@ public class UsuarioServiceTest {
 	public void testListEuserRotasPontos() {
 		Usuario user = new Usuario("mxd.maxado@gmail.com", "adm123", "Cleverson Machado");		
 		//ur.save(user);
-		us.CriarUsuario(user);
+		us.CriarUsuario(user); 
 		
 		Usuario user2 = new Usuario("juca.bala@gmail.com", "adm1232323", "Juca Bala");		
 		//ur.save(user2);
