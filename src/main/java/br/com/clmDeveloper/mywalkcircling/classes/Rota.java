@@ -13,15 +13,17 @@ public class Rota {
 	@GeneratedValue(generator = "rota_seq", strategy = GenerationType.SEQUENCE)
 	private Long ID;	 
 	
-	//@NotBlank
+	@NotBlank
 	private String descricao;
-	//@NotBlank
+	@NotBlank
 	private String email;
-	private Double distancia;	
 	
+	private Double distancia;	
+	/*
 	@OneToMany(mappedBy = "rota", targetEntity = Ponto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@OneToMany(mappedBy = "rota", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Ponto> pontos = new ArrayList<>();
-
+*/
 	
 	public Rota(Long ID, String descricao, Double distancia, String email) {
 		super();
@@ -31,7 +33,7 @@ public class Rota {
 		this.email = email;
 	}
 	
-	public Rota(Long ID, String descricao, Double distancia, String email, List<Ponto> pontos) {
+/*	public Rota(Long ID, String descricao, Double distancia, String email, List<Ponto> pontos) {
 		super();
 		this.ID = ID;
 		this.descricao = descricao;
@@ -39,7 +41,7 @@ public class Rota {
 		this.email = email;
 		this.pontos = pontos;
 	}
-
+*/
 	public Rota() {
 		super();
 	}
@@ -70,17 +72,17 @@ public class Rota {
 		this.email = email;
 	}
 	
-	public List<Ponto> getPontos() {
+	/*public List<Ponto> getPontos() {
 		return pontos;
 	}
 	public void setPontos(List<Ponto> pontos) {
 		this.pontos = pontos;
 	}
-
+*/
 	@Override
 	public String toString() {
 		return "Rota [ID=" + ID + ", descricao=" + descricao + ", email=" + email + ", distancia=" + distancia
-				+ ", pontos=" + pontos + "]";
+				+ "";
 	}
 	
 	

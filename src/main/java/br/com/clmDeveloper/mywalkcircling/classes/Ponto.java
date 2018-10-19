@@ -20,8 +20,10 @@ public class Ponto {
 	private String altitude;
 	private Double velocidade;
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Rota rota;
+	
+
 	
 	public Ponto() {
 		super();
@@ -84,6 +86,10 @@ public class Ponto {
 	public void setRota(Rota rota) {
 		this.rota = rota;
 	}
+
+	
+
+	
 	
 	
 	

@@ -58,18 +58,21 @@ public class PontoServiceImpl implements PontoService{
 		return listPontos;
 	}
 	
+	// ROTINA ABAIXO ESTA RETORNANDO JSON EM LOOP POR ISSO ESTA COMENTADA (referencia cruzada rota-ponto )
 	
 	@Override
 	@GetMapping(produces="application/json")
 	@RequestMapping("/getPontos/{id_rota}")
 	public ListPontos findPontosByRota(@PathVariable Long id_rota) {	
 		
+		System.out.println("veio " + id_rota);
+		
 		listPontos = new ListPontos();
 		
 		System.out.println("VEIO ID " + id_rota);
 		Rota rota = null;
 		
-		//Long id_rota = Long.parseLong(sid_rota);
+		// busco a rota referente ao ID recebido
         try {
 		   rota = rotaRepository.findByID(id_rota);
         }catch (Exception e) {
@@ -77,12 +80,16 @@ public class PontoServiceImpl implements PontoService{
 			return listPontos;
 		}
         
+        
+        
 		if (rota == null) {
 			listPontos.setMsg("Nenhuma Rota localizada para o ID informado. (" + id_rota + ")");
 		}
-		else
+		// Busco os pontos referentes a rota
+		else {
+		   //listPontos.setPontos(rota.getPontos());	
 		   listPontos.setPontos(pontoRepository.findPontobyRota(rota));
-		
+		}
 		if (listPontos.getPontos().toString() == "[]")
 		   listPontos.setMsg("Rota Sem nenhum ponto vinculado!!");
 		
