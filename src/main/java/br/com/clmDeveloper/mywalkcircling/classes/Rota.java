@@ -1,5 +1,6 @@
 package br.com.clmDeveloper.mywalkcircling.classes;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -12,14 +13,14 @@ public class Rota {
 	@GeneratedValue(generator = "rota_seq", strategy = GenerationType.SEQUENCE)
 	private Long ID;	 
 	
-	@NotBlank
+	//@NotBlank
 	private String descricao;
-	@NotBlank
+	//@NotBlank
 	private String email;
 	private Double distancia;	
 	
 	@OneToMany(mappedBy = "rota", targetEntity = Ponto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Ponto> pontos;
+	private List<Ponto> pontos = new ArrayList<>();
 
 	
 	public Rota(Long ID, String descricao, Double distancia, String email) {
@@ -40,6 +41,7 @@ public class Rota {
 	}
 
 	public Rota() {
+		super();
 	}
 	
 	
@@ -74,5 +76,12 @@ public class Rota {
 	public void setPontos(List<Ponto> pontos) {
 		this.pontos = pontos;
 	}
+
+	@Override
+	public String toString() {
+		return "Rota [ID=" + ID + ", descricao=" + descricao + ", email=" + email + ", distancia=" + distancia
+				+ ", pontos=" + pontos + "]";
+	}
+	
 	
 }

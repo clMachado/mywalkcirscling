@@ -22,7 +22,7 @@ public class RotaServiceImpl implements RotaService{
 	@Autowired
 	private RotaRepository rotaRepository;
 	
-	private ListRotas listRotas = null;
+	private ListRotas listRotas;
 	
 	
 
@@ -30,8 +30,8 @@ public class RotaServiceImpl implements RotaService{
 	@RequestMapping("/addRota")
 	@PostMapping(produces="application/json")
 	public ListRotas CriarRota(@RequestBody @Valid Rota rota) {
-		listRotas = new ListRotas();
 		
+		listRotas = new ListRotas();
 		listRotas.addRota(rotaRepository.save(rota));
 		
 		return listRotas;
@@ -44,8 +44,7 @@ public class RotaServiceImpl implements RotaService{
 		listRotas = new ListRotas(); 
 		try {
 			for (Rota rota : rotas.getRotas()) {
-				CriarRota(rota);
-				listRotas.addRota(rota);
+				listRotas.addRota(rotaRepository.save(rota));
 			}		
 			
 			listRotas.setMsg("sucesso");

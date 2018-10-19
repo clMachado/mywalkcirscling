@@ -1,15 +1,16 @@
 package br.com.clmDeveloper.mywalkcircling.classes;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ListPontos implements Serializable{
+public class ListPontos{
 	
 	private static final long serialVersionUID = 2806421523585360626L;
 	
-	private List<Ponto> pontos;
+	private List<Ponto> pontos = new ArrayList<>();
 	private String msg;
 
+	
 	public List<Ponto> getPontos() {
 		return pontos;
 	}
@@ -38,8 +39,5 @@ public class ListPontos implements Serializable{
 	public void addPonto(Ponto ponto) {
 		this.pontos.add(ponto);
 	}
-	
-	
-	
 
 }
