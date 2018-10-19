@@ -1,20 +1,11 @@
 package br.com.clmDeveloper.mywalkcircling.resources;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
-
-import org.json.JSONArray;
-import org.springframework.asm.TypeReference;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-
 import br.com.clmDeveloper.mywalkcircling.classes.ListPontos;
-import br.com.clmDeveloper.mywalkcircling.classes.ListRotas;
 import br.com.clmDeveloper.mywalkcircling.classes.Ponto;
 import br.com.clmDeveloper.mywalkcircling.classes.Rota;
 import br.com.clmDeveloper.mywalkcircling.repository.PontoRepository;
@@ -58,10 +49,11 @@ public class PontoServiceImpl implements PontoService{
 	@RequestMapping("/getPontos")
 	public List<Ponto> findPontosByRota(Rota rota) {	
 		
-		List<Ponto> lp = pontoRepository.findPontobyRota(rota);
-		if (lp == null)
-			lp = new ArrayList();
-		return lp;
+		//List<Ponto> lp = 
+				return pontoRepository.findPontobyRota(rota);
+//		if (lp == null)
+//			lp = new ArrayList();
+//		return lp;
 	}
 
 }

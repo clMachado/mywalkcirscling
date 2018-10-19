@@ -5,6 +5,12 @@ import java.util.List;
 
 public class ListRotas implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2806421523585360625L;
+	
+	
 	private List<Rota> rotas;
 
 	public List<Rota> getRotas() {

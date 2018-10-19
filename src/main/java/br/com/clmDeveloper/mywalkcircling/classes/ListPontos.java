@@ -5,6 +5,8 @@ import java.util.List;
 
 public class ListPontos implements Serializable{
 	
+	private static final long serialVersionUID = 2806421523585360626L;
+	
 	private List<Ponto> pontos;
 
 	public List<Ponto> getPontos() {
