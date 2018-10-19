@@ -39,16 +39,16 @@ public class PontoServiceImpl implements PontoService{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return e.getMessage();
+			return e.toString();
 		}
 		
 	}
 	
 	
 	@Override
-	@GetMapping(produces="application/json")
+	@PostMapping(produces="application/json")
 	@RequestMapping("/getPontos")
-	public List<Ponto> findPontosByRota(Rota rota) {	
+	public List<Ponto> findPontosByRota(@RequestBody @Valid Rota rota) {	
 		
 		//List<Ponto> lp = 
 				return pontoRepository.findPontobyRota(rota);

@@ -44,7 +44,7 @@ public class RotaServiceImpl implements RotaService{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return e.getMessage();
+			return e.toString();
 		}
 		//return false;
 	}

@@ -22,7 +22,6 @@ public class Ponto {
 	private Double velocidade;
 	@NotBlank
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonSerialize
 	private Rota rota;
 	
 	public Ponto() {
