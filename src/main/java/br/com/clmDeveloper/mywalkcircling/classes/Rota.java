@@ -10,7 +10,7 @@ public class Rota {
 	@Id
 	@SequenceGenerator(name = "rota_seq", sequenceName = "rota_seq")
 	@GeneratedValue(generator = "rota_seq", strategy = GenerationType.SEQUENCE)
-	private Long ID;	
+	private Long ID;	 
 	
 	@NotBlank
 	private String descricao;
