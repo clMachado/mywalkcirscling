@@ -11,5 +11,9 @@ public interface RotaService {
 	ListRotas CriarRotas(ListRotas rotas);
 	
 	ListRotas findAllRotas(String email);
+	
+	ListRotas findAllRotasPontos(String email);
+	
+	ListRotas findAllRotaPontos(Long rota);
 
 }

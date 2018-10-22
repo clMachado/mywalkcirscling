@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Ponto {
@@ -20,6 +22,7 @@ public class Ponto {
 	private String altitude;
 	private Double velocidade;
 
+	@JsonIgnore // faz com que este campo nao seja retornado em leituras json
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Rota rota;
 	
@@ -79,6 +82,7 @@ public class Ponto {
 		this.velocidade = velocidade;
 	}
 
+	@JsonIgnore 
 	public Rota getRota() {
 		return rota;
 	}

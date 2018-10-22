@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Service
 @RestController
-@RequestMapping("/reposit/pontos")
+@RequestMapping("/reposit/pontos") // request = ENTRADA  response = RESPOSTA
 public class PontoServiceImpl implements PontoService{
 
 	@Autowired

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ListPontos{
 	
-	private static final long serialVersionUID = 2806421523585360626L;
+	//private static final long serialVersionUID = 2806421523585360626L;
 	
 	private List<Ponto> pontos = new ArrayList<>();
 	private String msg;

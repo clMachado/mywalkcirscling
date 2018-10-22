@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Rota {
 	
@@ -22,8 +24,11 @@ public class Rota {
 	/*
 	@OneToMany(mappedBy = "rota", targetEntity = Ponto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@OneToMany(mappedBy = "rota", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Ponto> pontos = new ArrayList<>();
+	private List<Ponto> pontos = new ArrayList<>();	
 */
+	@Transient
+	//@JsonIgnore
+	private List<Ponto> pontos = new ArrayList<>();
 	
 	public Rota(Long ID, String descricao, Double distancia, String email) {
 		super();
@@ -72,17 +77,22 @@ public class Rota {
 		this.email = email;
 	}
 	
-	/*public List<Ponto> getPontos() {
+	
+	public List<Ponto> getPontos() {
 		return pontos;
 	}
 	public void setPontos(List<Ponto> pontos) {
 		this.pontos = pontos;
 	}
-*/
+
 	@Override
 	public String toString() {
 		return "Rota [ID=" + ID + ", descricao=" + descricao + ", email=" + email + ", distancia=" + distancia
 				+ "";
+	}
+	
+	public void addPonto(Ponto ponto) {
+		this.pontos.add(ponto);
 	}
 	
 	

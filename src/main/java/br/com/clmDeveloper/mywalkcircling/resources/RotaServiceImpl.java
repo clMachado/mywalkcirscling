@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.clmDeveloper.mywalkcircling.classes.ListRotas;
 import br.com.clmDeveloper.mywalkcircling.classes.Rota;
+import br.com.clmDeveloper.mywalkcircling.repository.PontoRepository;
 import br.com.clmDeveloper.mywalkcircling.repository.RotaRepository;
 
 @Service
@@ -22,7 +23,12 @@ public class RotaServiceImpl implements RotaService{
 	@Autowired
 	private RotaRepository rotaRepository;
 	
+	@Autowired
+	private PontoRepository pontoRepository;
+	
 	private ListRotas listRotas;
+	
+	
 	
 	
 
@@ -36,6 +42,9 @@ public class RotaServiceImpl implements RotaService{
 		
 		return listRotas;
 	}
+	
+	
+	
 	
 	@Override
 	@RequestMapping("/addRotas")
@@ -57,15 +66,72 @@ public class RotaServiceImpl implements RotaService{
 		return listRotas;
 	}
 
+	
+	
+	
 	@Override
 	@GetMapping(produces="application/json")
-	@RequestMapping("/{email}/getRotas")
+	@RequestMapping({"/getRotas/{email}", "/getRotas"})
 	public ListRotas findAllRotas(@PathVariable String email) {
 		listRotas = new ListRotas();
+		if(!email.trim().equals(""))
+		   listRotas.setRotas(rotaRepository.findAllRotas(email));
+		else
+		   listRotas.setRotas(rotaRepository.findAll());	
+		
+		if (listRotas.getRotas().toString() == "[]")
+			listRotas.setMsg("Nenhuma Rota vinculada ao email " + email + ".");
+		
+		return listRotas;
+	}
+	
+	
+	
+	
+	
+	@Override
+	@GetMapping(produces="application/json")
+	@RequestMapping("/{email}/getRotasCompleto")
+	public ListRotas findAllRotasPontos(@PathVariable String email) {
+		
+		listRotas = new ListRotas();
+		
+		if(email.trim().equals("")) {
+		   listRotas.setMsg("ERRO: Um Email de usuario deve ser informado!!");
+		   return listRotas;
+		}		
+				
+		
 		listRotas.setRotas(rotaRepository.findAllRotas(email));
 		
 		if (listRotas.getRotas().toString() == "[]")
 			listRotas.setMsg("Nenhuma Rota vinculada ao email " + email + ".");
+		else {
+		    // carrego os pontos de cada Rota
+			for(Rota rota: listRotas.getRotas()) {
+				rota.setPontos(pontoRepository.findPontobyRota(rota));
+			}
+		}
+				
+		return listRotas;
+	}
+	
+	
+	
+	@Override
+	@GetMapping(produces="application/json")
+	@RequestMapping("/getRotasCompleto/{id}")
+	public ListRotas findAllRotaPontos(@PathVariable Long id) {
+		listRotas = new ListRotas();
+
+		Rota rota = rotaRepository.findByID(id);
+
+		if (rota != null) {
+		   //rota.setPontos(pontoRepository.findPontobyRota(rota));
+		   listRotas.addRota(rota);	
+		}
+		else
+			listRotas.setMsg("Nenhuma Rota localizada. " + " (" + id + ")");
 		
 		return listRotas;
 	}

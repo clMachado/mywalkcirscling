@@ -45,13 +45,13 @@ public class UsuarioServiceTest {
 		pr.deleteAll();
 		rr.deleteAll();		
 	}
-	
+	/*
 	@After
 	public void deleta2() {
 		ur.deleteAll();
 		pr.deleteAll();
 		rr.deleteAll();		
-	}
+	}*/
 	
 	
 	
