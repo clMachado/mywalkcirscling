@@ -27,9 +27,9 @@ public class Ponto {
 	private Rota rota;
 	
 
-	
+	// teste
 	public Ponto() {
-		super();
+		super(); 
 	}
 
 	public Ponto(@Valid String latitude, @Valid String longitude, String altitude, Double velocidade,
