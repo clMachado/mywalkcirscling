@@ -127,7 +127,7 @@ public class RotaServiceImpl implements RotaService{
 		Rota rota = rotaRepository.findByID(id);
 
 		if (rota != null) {
-		   //rota.setPontos(pontoRepository.findPontobyRota(rota));
+		   rota.setPontos(pontoRepository.findPontobyRota(rota));
 		   listRotas.addRota(rota);	
 		}
 		else

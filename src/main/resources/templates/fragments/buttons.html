@@ -1,0 +1,18 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+<th:block th:fragment="novo(nomeObjeto)">
+	<div class="col-lg-15 text-left">
+		<a class="btn btn-primary" th:href="@{|/${nomeObjeto}/novo|}">Novo</a> <!-- | concatena a string que tiver entre eles -->
+	</div>
+	</th:block>
+	
+	
+</body>
+</html>

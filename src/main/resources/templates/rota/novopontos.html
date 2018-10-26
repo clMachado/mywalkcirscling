@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/pontos.css}"/>
+
+<title>Lista de Pontos</title>
+
+
+<script type="text/javascript" th:src="@{/js/pontos.js}"> </script>
+
+<script type="text/javascript">
+   function initMaps() {
+	   alert("deve ser chamado o initMap para abrir o mapa"); } 	
+</script>
+<!-- script type="text/javascript"
+	   src="https://maps.googleapis.com/maps/api/js?key=" + ${apiKey} >
+	</script -->
+
+
+
+
+</head>
+<body onload="initMaps()">
+
+<nav th:replace="fragments/cabecalho :: cabecalho"></nav> 
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <h1 class="mt-5">Visualizacao Rota: <i th:text= "${nomeRota}"></i></h1>
+      
+      <span th:if="${erro}" th:text="${msg}"> </span>
+      <span th:if="!${erro}" th:text="${msg}" > </span>
+      
+		<th:block th:insert="fragments/buttons :: novo(aluno)"> </th:block>
+				
+		<table class="table">
+			<thead>
+				<tr>
+					<th th:text="ID"></th>
+					<th th:text="latitude"></th>
+					<th th:text="longitude"></th>
+					<th th:text="altitude"></th>
+					<th th:text="velocidade"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="ponto: ${pontos}">
+				    <td th:text="${ponto.ID}"/>
+					<td th:text="${ponto.latitude}"></td>
+					<td th:text="${ponto.longitude}"></td>
+					<td th:text="${ponto.altitude}"></td>
+					<td th:text="${ponto.velocidade}"></td>
+					
+				</tr>		
+			</tbody>
+		</table>
+		
+    </div>
+  </div>
+</div>
+
+<div id="map" style="width:100%; height:100%"></div>
+<button onclick="addMarker(-25.83, -52.72)" >criar</button>
+
+
+</body>
+</html>
