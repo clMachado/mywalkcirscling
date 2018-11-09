@@ -5,10 +5,6 @@ import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-
-import org.springframework.boot.json.GsonJsonParser;
-import org.springframework.http.converter.json.GsonBuilderUtils;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

@@ -2,7 +2,6 @@ package br.com.clmDeveloper.mywalkcircling.classes;
 
 import java.util.Collection;
 import java.util.HashSet;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,10 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import com.sun.istack.internal.NotNull;
 
 @Entity
