@@ -24,7 +24,7 @@ public class SegurancaConfiguracao extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		       .antMatchers("/login", "/login-error", "/css/**", "/js/**", "/webjars/**").permitAll()  // todos terao acesso a essas pastas/arquivos
+		       .antMatchers("/login", "/usuario/**", "/login-error", "/css/**", "/js/**", "/webjars/**").permitAll()  // todos terao acesso a essas pastas/arquivos
 		       .antMatchers("/principal","/rota/**","/maps/**", "/").hasAnyRole("USER", "ADMIN")              // PERMITE QUE CORDENADORES E ALUNOS so TENHAM ACESSO A PAGINAS DO PATH ALUNO ou no diretorio / onde esta o index
 		       .antMatchers("/**", "/usuario/**").hasAnyRole("ADMIN")                                  // PERMITE QUE ADMIN TENHA ACESSO GERAL  (SE INVERTER AS LINHAS PODE DAR PROBLEMAS NAS PERMISSOES)
 		       
