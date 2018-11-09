@@ -1,6 +1,9 @@
 package br.com.clmDeveloper.mywalkcircling.resources;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.*;
@@ -63,35 +66,34 @@ public class PontoServiceImpl implements PontoService{
 	@Override
 	@GetMapping(produces="application/json")
 	@RequestMapping("/getPontos/{id_rota}")
-	public ListPontos findPontosByRota(@PathVariable Long id_rota) {	
+	public List<Ponto> findPontosByRota(@PathVariable Long id_rota) {	
 		
-		System.out.println("veio " + id_rota);
-		
-		listPontos = new ListPontos();
+		System.out.println("veio buscar os pontos " + id_rota);
+		List<Ponto> listPontos = new ArrayList<>();
 		
 		System.out.println("VEIO ID " + id_rota);
 		Rota rota = null;
 		
 		// busco a rota referente ao ID recebido
-        try {
+        //try {
 		   rota = rotaRepository.findByID(id_rota);
-        }catch (Exception e) {
-			listPontos.setMsg(e.toString());
-			return listPontos;
-		}
+        //}catch (Exception e) {
+		//	listPontos.setMsg(e.toString());
+		//	return listPontos;
+		//}
         
         
         
-		if (rota == null) {
-			listPontos.setMsg("Nenhuma Rota localizada para o ID informado. (" + id_rota + ")");
-		}
+		//if (rota == null) {
+		//	listPontos.setMsg("Nenhuma Rota localizada para o ID informado. (" + id_rota + ")");
+		//}
 		// Busco os pontos referentes a rota
-		else {
+		//else {
 		   //listPontos.setPontos(rota.getPontos());	
-		   listPontos.setPontos(pontoRepository.findPontobyRota(rota));
-		}
-		if (listPontos.getPontos().toString() == "[]")
-		   listPontos.setMsg("Rota Sem nenhum ponto vinculado!!");
+		   listPontos = pontoRepository.findPontobyRota(rota);
+		//}
+		//if (listPontos.)
+		//   listPontos.setMsg("Rota Sem nenhum ponto vinculado!!");
 		
 		return listPontos;
 	}

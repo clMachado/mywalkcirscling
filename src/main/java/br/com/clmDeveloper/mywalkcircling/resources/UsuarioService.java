@@ -5,7 +5,7 @@ import br.com.clmDeveloper.mywalkcircling.classes.Usuario;
 public interface UsuarioService {
 	
 	Usuario CriarUsuario(Usuario us);
-	Usuario FazerLogin(Usuario us);
+	
 	
 
 }

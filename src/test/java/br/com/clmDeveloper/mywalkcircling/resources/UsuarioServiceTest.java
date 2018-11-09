@@ -1,5 +1,6 @@
 package br.com.clmDeveloper.mywalkcircling.resources;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,14 +10,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.clmDeveloper.mywalkcircling.MywalkcirclingApplication;
 import br.com.clmDeveloper.mywalkcircling.classes.ListPontos;
 import br.com.clmDeveloper.mywalkcircling.classes.ListRotas;
+import br.com.clmDeveloper.mywalkcircling.classes.Permissao;
 import br.com.clmDeveloper.mywalkcircling.classes.Ponto;
 import br.com.clmDeveloper.mywalkcircling.classes.Rota;
 import br.com.clmDeveloper.mywalkcircling.classes.Usuario;
+import br.com.clmDeveloper.mywalkcircling.repository.PermissaoRepository;
 import br.com.clmDeveloper.mywalkcircling.repository.PontoRepository;
 import br.com.clmDeveloper.mywalkcircling.repository.RotaRepository;
 import br.com.clmDeveloper.mywalkcircling.repository.UsuarioRepository;
@@ -27,6 +31,9 @@ public class UsuarioServiceTest {
 	
 	@Autowired
 	UsuarioServiceImpl us;
+	
+	@Autowired
+	PermissaoRepository perm;
 	@Autowired
 	RotaServiceImpl    rt ;
 	@Autowired
@@ -38,31 +45,46 @@ public class UsuarioServiceTest {
 	PontoRepository   pr;
 	@Autowired
 	RotaRepository    rr;
+	@Autowired		
+	private PasswordEncoder passCoder;
 	
 	@Before
 	public void deleta1() {
 		ur.deleteAll();
 		pr.deleteAll();
-		rr.deleteAll();		
+		rr.deleteAll();
+		perm.deleteAll();
 	}
 	/*
 	@After
 	public void deleta2() {
 		ur.deleteAll();
 		pr.deleteAll();
-		rr.deleteAll();		
+		rr.deleteAll();
+		perm.deleteAll();		
 	}*/
 	
 	
 	
 	@Test
 	public void testListEuserRotasPontos() {
-		Usuario user = new Usuario("mxd.maxado@gmail.com", "adm123", "Cleverson Machado");		
-		//ur.save(user);
+		
+		Permissao permisao1 = new Permissao();
+		permisao1.setAuthority("ROLE_ADMIN");
+		perm.save(permisao1);
+		
+		Permissao permisao2 = new Permissao();
+		permisao2.setAuthority("ROLE_USER");
+		perm.save(permisao2);
+		
+		
+		Usuario user = new Usuario("mxd.maxado@gmail.com","mxd.maxado@gmail.com", passCoder.encode("adm123"), "Cleverson Machado");	
+		user.addPermissao(permisao1);
+		
 		us.CriarUsuario(user); 
 		
-		Usuario user2 = new Usuario("juca.bala@gmail.com", "adm1232323", "Juca Bala");		
-		//ur.save(user2);
+		Usuario user2 = new Usuario("juca.bala@gmail.com","juca.bala@gmail.com", passCoder.encode("adm111"), "Juca Bala");	
+		user2.addPermissao(permisao2);
 		us.CriarUsuario(user2);
 		
 		ListRotas rotas = new ListRotas();
@@ -79,10 +101,10 @@ public class UsuarioServiceTest {
 		
 		
 		List<Ponto> pontos = new ArrayList<>();
-		pontos.add(new Ponto("-51", "-28", "", 1.0 , r1));
-		pontos.add(new Ponto("-51.1", "-28", "", 1.0 , r1));
-		pontos.add(new Ponto("-51.2", "-28", "", 1.0 , r1));
-		pontos.add(new Ponto("-51.3", "-28", "", 1.0 , r1));
+		pontos.add(new Ponto(1L, LocalDate.of(2018, 11, 02), "-25.8346683", "-52.727471", "", 1.0 , r1));
+		pontos.add(new Ponto(2L, LocalDate.of(2018, 11, 02), "-25.8347775", "-52.7249978", "", 1.0 , r1));
+		pontos.add(new Ponto(3L, LocalDate.of(2018, 11, 02), "-25.8363548", "-52.7247626", "", 1.0 , r1));
+		pontos.add(new Ponto(4L, LocalDate.of(2018, 11, 02), "-25.8362797", "-52.7272054", "", 1.0 , r1));
 		//r1.setPontos(pontos);
 		
 		ListPontos pontosLS = new ListPontos();
@@ -90,8 +112,8 @@ public class UsuarioServiceTest {
 		
 		
 		List<Ponto> pontos2 = new ArrayList<>();
-		pontos2.add(new Ponto("-51", "-28.1", "", 1.0 , r2));
-		pontos2.add(new Ponto("-51", "-28.2", "", 1.0 , r2));
+		pontos2.add(new Ponto(1L, LocalDate.of(2018, 11, 02), "-51", "-28.1", "", 1.0 , r2));
+		pontos2.add(new Ponto(2L, LocalDate.of(2018, 11, 02), "-51", "-28.2", "", 1.0 , r2));
 		//r2.setPontos(pontos2);
 		
 		ListPontos pontosLS2 = new ListPontos();

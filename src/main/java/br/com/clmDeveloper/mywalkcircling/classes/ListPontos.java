@@ -40,4 +40,13 @@ public class ListPontos{
 		this.pontos.add(ponto);
 	}
 
+	@Override
+	public String toString() {
+		return "ListPontos [pontos=" + pontos + "]";
+	}
+	
+	
+	
+	
+
 }

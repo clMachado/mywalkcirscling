@@ -16,9 +16,10 @@ import br.com.clmDeveloper.mywalkcircling.repository.UsuarioRepository;
 
 @RestController
 @Service
-@RequestMapping("/reposit/usuario")
-public class UsuarioServiceImpl implements UsuarioService{
+@RequestMapping("/reposit/usuario") 
+public class UsuarioServiceImpl { //implements UsuarioService{
 	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
@@ -31,36 +32,14 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return it;
 	}
 
-	@Override
+	
+
 	@RequestMapping("/add")
 	@PostMapping(produces="application/json")
 	public Usuario CriarUsuario(@RequestBody @Valid Usuario us) {
-		System.out.println("Criando Usuario!!  Email: " + us.getEmail() + " Senha: " + us.getSenha() + " Nome: " + us.getNome() );
+		System.out.println("Criando Usuario!!  Email: " + us.getEmail() + "Username: " + us.getUsername() + " Senha: " + us.getPassword() + " Nome: " + us.getNome() );
 		return usuarioRepository.save(us);		
 	}
 
-	@Override
-	@RequestMapping("/login")
-	@PostMapping(produces="application/json")
-	public Usuario FazerLogin(@RequestBody @Valid Usuario us) {
-		
-		Usuario usret = new Usuario();
-		usret = us;
-		
-		System.out.println("Fazendo Login Usuario!!  Email: " + us.getEmail() + " Senha: " + us.getSenha());
-		
-	    us = usuarioRepository.findByUsuario(us.getEmail(), us.getSenha());
-	    
-	    if(us != null)
-	       System.out.println("Usuario Logado!!  Email: " + us.getEmail() + " Senha: " + us.getSenha() + " Nome: " + us.getNome() );
-	    else {
-	    	System.out.println("Login Invalido!!");
-	    	   	
-	    	usret.setNome("Login Invalido!!");
-	    	us = usret;
-	    }
-	    
-	    return us;
-	}
-
+	
 }

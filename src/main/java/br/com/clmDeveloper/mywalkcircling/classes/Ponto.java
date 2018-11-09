@@ -1,9 +1,15 @@
 package br.com.clmDeveloper.mywalkcircling.classes;
 
+import java.time.LocalDate;
+
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.boot.json.GsonJsonParser;
+import org.springframework.http.converter.json.GsonBuilderUtils;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -13,7 +19,10 @@ public class Ponto {
 	@Id
 	@SequenceGenerator(name = "ponto_seq", sequenceName = "ponto_seq")
 	@GeneratedValue(generator = "ponto_seq", strategy = GenerationType.SEQUENCE)
-	private Long ID;	
+	private Long ID;
+	
+	private Long sequencia;
+	private LocalDate data;
 	
 	@NotBlank
 	private String latitude;
@@ -32,9 +41,11 @@ public class Ponto {
 		super(); 
 	}
 
-	public Ponto(@Valid String latitude, @Valid String longitude, String altitude, Double velocidade,
+	public Ponto(Long sequencia, LocalDate data, @Valid String latitude, @Valid String longitude, String altitude, Double velocidade,
 		@Valid Rota rota) {
 		super();
+		this.sequencia = sequencia;
+		this.data = data;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.altitude = altitude;
@@ -90,6 +101,43 @@ public class Ponto {
 	public void setRota(Rota rota) {
 		this.rota = rota;
 	}
+	
+	
+
+	public Long getSequencia() {
+		return sequencia;
+	}
+
+	public void setSequencia(Long sequencia) {
+		this.sequencia = sequencia;
+	}
+
+	public LocalDate getData() {
+		return data;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
+	@Override
+	@JsonCreator
+	public String toString() {
+		
+		
+		
+		
+		
+		
+		
+
+		return "Ponto [ID=" + ID + ", latitude=" + latitude + ", longitude=" + longitude + ", altitude=" + altitude
+				+ ", velocidade=" + velocidade + "]";
+	}
+
+	
+	
+	
 
 	
 

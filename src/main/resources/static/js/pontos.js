@@ -1,6 +1,7 @@
 var maps;
       
       function initMap() {
+    	  alert("aqui");
     	var posit = {lat: -25.833924 , lng: -52.726102};  
     	  
         var mapOptions = {
@@ -9,7 +10,7 @@ var maps;
           zoom: 8,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        maps = new google.maps.Map(document.getElementById('map'), mapOptions);
+        maps = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
         //maps = map;
         
         var marker = new google.maps.Marker({position: posit,

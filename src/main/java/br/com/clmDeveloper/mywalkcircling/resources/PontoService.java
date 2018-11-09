@@ -1,5 +1,7 @@
 package br.com.clmDeveloper.mywalkcircling.resources;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.EntityGraph;
 
 import br.com.clmDeveloper.mywalkcircling.classes.ListPontos;
@@ -11,6 +13,6 @@ public interface PontoService {
 	
 	ListPontos CriarPontos(ListPontos pontos);
 	
-	ListPontos findPontosByRota(Long sid_rota);
+	List<Ponto> findPontosByRota(Long sid_rota);
 
 }

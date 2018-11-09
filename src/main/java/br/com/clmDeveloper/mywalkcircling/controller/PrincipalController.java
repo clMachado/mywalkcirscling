@@ -13,5 +13,17 @@ public class PrincipalController {
 	        model.addAttribute("nome", "Cleverson Machado");
 	        return "principal";
 	    }
+	    
+	    @GetMapping("/login")
+		public String login(){
+			return "login";
+		}
+		
+		
+		@GetMapping("/login-error")
+		public String loginError(Model model){
+			model.addAttribute("error_login", true);
+			return "login";
+		}
 
 }

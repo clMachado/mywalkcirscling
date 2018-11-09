@@ -7,7 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+//import com.google.gson.Gson;
+
+import br.com.clmDeveloper.mywalkcircling.classes.ListPontos;
 import br.com.clmDeveloper.mywalkcircling.classes.ListRotas;
 import br.com.clmDeveloper.mywalkcircling.classes.Ponto;
 import br.com.clmDeveloper.mywalkcircling.classes.Rota;
@@ -48,17 +53,26 @@ public class RotasController {
     }
 	
 	@GetMapping("/visualizar/{ID}")
-	public String visualizar(@PathVariable Long ID, Model model, RedirectAttributes redirect){
+	public String visualizar(@PathVariable Long ID,  Model model, RedirectAttributes redirect){
 		
-		
+		//@RequestParam String user,
 		ListRotas lista = rotaService.findAllRotaPontos(ID);
 		
 		if("".equals(lista.getMsg()) ||
 	        	lista.getMsg() == null	 ){
             List<Ponto> pontos = lista.getRotas().get(0).getPontos();
-        
+            
+            ListPontos lp = new ListPontos();
+            lp.setPontos(pontos);
+
+            //Gson gson = new Gson();
+           // String listPontos = gson.toJson(pontos);
+            
+            
+            
             model.addAttribute("apiKey", API_KEY);
-            model.addAttribute("pontos",pontos);
+            model.addAttribute("idRota", ID);
+          //  model.addAttribute("pontos",pontos);
             model.addAttribute("nomeRota",lista.getRotas().get(0).getDescricao());
          }
          else {
