@@ -15,7 +15,7 @@ public class Permissao implements GrantedAuthority {
 	private static final long serialVersionUID = 7719618879298057805L;
 
 	@Id
-	@SequenceGenerator(name="perm_seq",sequenceName="perm_seq")
+	@SequenceGenerator(name="perm_seq",sequenceName="perm_seq", allocationSize=1)
 	@GeneratedValue(generator="perm_seq",
 			strategy = GenerationType.SEQUENCE)
 	private Long codigo;

@@ -48,10 +48,8 @@ public class UsuarioController {
 		
 		@PostMapping("/salvar")
 		public String salvar(Usuario user, @RequestParam Long codigoPermissao){ //codigoPermissao deve ser o mesmo elemento do html para conseguir pegar aqui
-			
-			user.setUsername(user.getEmail());
-
-			if(user.getPassword().isEmpty()){ // se senha for vazia 
+				
+			if(user.getPassword().isEmpty()){           // se senha for vazia 
 				if(user.getCodigo() != null){			//e se for alteracao (nao esta alterando senha pois esta vazia)
 				    Usuario userAtual = usuarioRepositorio.findById(user.getCodigo()).get(); // busco a senha velha e gravo ela novamente
 				    user.setPassword(userAtual.getPassword());

@@ -8,16 +8,17 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
-import br.com.clmDeveloper.mywalkcircling.classes.ListPontos;
 import br.com.clmDeveloper.mywalkcircling.classes.Ponto;
 import br.com.clmDeveloper.mywalkcircling.classes.Rota;
 import br.com.clmDeveloper.mywalkcircling.repository.PontoRepository;
 import br.com.clmDeveloper.mywalkcircling.repository.RotaRepository;
+import br.com.clmDeveloper.mywalkcircling.service.AppService;
+
 import org.springframework.web.bind.annotation.*;
 
 @Service
 @RestController
-@RequestMapping("/reposit/pontos") // request = ENTRADA  response = RESPOSTA
+@RequestMapping("/reposit/web/pontos") // request = ENTRADA  response = RESPOSTA
 public class PontoServiceImpl implements PontoService{
 
 	@Autowired
@@ -26,6 +27,10 @@ public class PontoServiceImpl implements PontoService{
 	@Autowired
 	private RotaRepository rotaRepository;
 	
+	@Autowired
+	AppService appService;
+	
+	/*
 	private ListPontos listPontos = null;
 	
 	@Override
@@ -60,42 +65,18 @@ public class PontoServiceImpl implements PontoService{
 		
 		return listPontos;
 	}
-	
+	*/
 	// ROTINA ABAIXO ESTA RETORNANDO JSON EM LOOP POR ISSO ESTA COMENTADA (referencia cruzada rota-ponto )
 	
 	@Override
 	@GetMapping(produces="application/json")
 	@RequestMapping("/getPontos/{id_rota}")
-	public List<Ponto> findPontosByRota(@PathVariable Long id_rota) {	
+	public List<Ponto> findPontosByRota(@PathVariable Integer id_rota) {	
 		
 		System.out.println("veio buscar os pontos " + id_rota);
-		List<Ponto> listPontos = new ArrayList<>();
-		
-		System.out.println("VEIO ID " + id_rota);
-		Rota rota = null;
-		
-		// busco a rota referente ao ID recebido
-        //try {
-		   rota = rotaRepository.findByID(id_rota);
-        //}catch (Exception e) {
-		//	listPontos.setMsg(e.toString());
-		//	return listPontos;
-		//}
-        
-        
-        
-		//if (rota == null) {
-		//	listPontos.setMsg("Nenhuma Rota localizada para o ID informado. (" + id_rota + ")");
-		//}
-		// Busco os pontos referentes a rota
-		//else {
-		   //listPontos.setPontos(rota.getPontos());	
-		   listPontos = pontoRepository.findPontobyRota(rota);
-		//}
-		//if (listPontos.)
-		//   listPontos.setMsg("Rota Sem nenhum ponto vinculado!!");
-		
+		List<Ponto> listPontos = appService.buscaPontos(id_rota);
 		return listPontos;
 	}
+	
 
 }

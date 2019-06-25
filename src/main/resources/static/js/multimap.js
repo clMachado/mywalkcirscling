@@ -3,14 +3,19 @@
 function renderGoogleMap() {
 	var start_point = new google.maps.LatLng(0, 0);
 	
+	
+	console.log('renderGoogleMap -> multimap.js');
+	
 	// Creating a new map
 	var map = new google.maps.Map(document.getElementById("map_canvas"), {
 		center : start_point,
-		zoom : 8,
+		zoom : 14,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	});
 	
-	//alert("ola");
+	map.addListener('zoom_changed', function(){
+		   //alert("deu zoom" + map.zoom);	
+		});
 	
 
 	// Creating a global infoWindow object that will be reused by all markers
@@ -18,15 +23,13 @@ function renderGoogleMap() {
 
 	function setMarkerPoints(map, marker) {
 		var bounds = new google.maps.LatLngBounds();
-		
+
 		var idRota = $("#idRotas").val();
 		
-		
-
 		$.ajax({
 			type : "GET",
 			//url : '/products/json',
-			url : '/reposit/pontos/getPontos/' + idRota,
+			url : '/reposit/web/pontos/getPontos/' + idRota,
 			dataType : "json",
 			success : function(data) {
 				
@@ -37,11 +40,8 @@ function renderGoogleMap() {
 
 					$.each(data, function(marker, data) {
 						
-						//alert(data.latitude + " -- " + data.longitude);
-
 						var latLng = new google.maps.LatLng(data.latitude,
 								data.longitude);
-						//bounds.extend(latLng);
 						
 						if(start_point == null){
 							start_point = latLng;
@@ -54,33 +54,26 @@ function renderGoogleMap() {
 							title : data.latitude + " " + data.longitude + " " + data.data
 						});
 
-						var windowContent = '<h3>' + data.latitude + '</h3>' + '<p>'
-								+ data.velocidade + '</p>';
+						var windowContent = 'Latitude:  ' + data.latitude   + '<br/>' +
+						                    'Longitude: ' + data.longitude  + '<br/>' +
+						                    'Velocidade:' + data.velocidade + '<br/>' +
+						                    '<img src="http://www.coasul.com.br/img/logo-50-anos.png" />'
+								'';			
+						var infowindow = new google.maps.InfoWindow({
+					          content: windowContent
+					        });
 
-//						// Attaching a click event to the current marker
-//						infobox = new InfoBox({
-//							content : infoWindow.setContent(windowContent),
-//							alignBottom : true,
-//							pixelOffset : new google.maps.Size(-160, -45)
-//						});
-
-//						google.maps.event.addListener(marker, 'click',
-//								function() {
-//
-//									// Open this map's infobox
-//									infobox.open(map, marker);
-//									infobox.setContent(windowContent);
-//									map.panTo(marker.getPosition());
-//									infobox.show();
-//								});
-//						google.maps.event.addListener(map, 'click', function() {
-//							infobox.setMap(null);
-//						});
+						marker.addListener('click', function() {
+						    //map.setZoom(14);
+						    //map.setCenter(marker.getPosition());
+						    infowindow.open(map, marker);
+						  });
+						
+						map.setCenter(marker.getPosition());
+						
 					});
-
 				}
-				
-				
+								
 			},
 			error : function(data) {
 				console.log('Por Favor recarregue a pagina ou tente Novamente ...');
@@ -88,14 +81,9 @@ function renderGoogleMap() {
 		});
 		// END MARKER DATA
 
-		// end loop through json
-
 		map.setCenter(start_point);
-		map.fitBounds(bounds);
 	}
+	
 	setMarkerPoints(map);
+	map.setCenter(start_point);
 }
-
-/* ]]> */
-
-// google.maps.event.addDomListener(window, 'load', renderGoogleMap);

@@ -1,60 +1,51 @@
 package br.com.clmDeveloper.mywalkcircling.classes;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
 
 @Entity
 public class Rota {
 	
 	@Id
-	@SequenceGenerator(name = "rota_seq", sequenceName = "rota_seq")
-	@GeneratedValue(generator = "rota_seq", strategy = GenerationType.SEQUENCE)
-	private Long ID;	 
+	@SequenceGenerator(name = "rota_seq", sequenceName = "rota_seq", allocationSize=1)
+	@GeneratedValue(generator = "rota_seq", strategy = GenerationType.SEQUENCE )
+	private Integer ID;	 
+	
+	@NotBlank
+	private String uid_User;
+	
+	private String proprietario;
 	
 	@NotBlank
 	private String descricao;
-	@NotBlank
-	private String email;
 	
 	private Double distancia;	
 	/*
 	@OneToMany(mappedBy = "rota", targetEntity = Ponto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@OneToMany(mappedBy = "rota", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Ponto> pontos = new ArrayList<>();	
-*/
+
 	@Transient
 	//@JsonIgnore
 	private List<Ponto> pontos = new ArrayList<>();
-	
-	public Rota(Long ID, String descricao, Double distancia, String email) {
-		super();
-		this.ID = ID;
-		this.descricao = descricao;
-		this.distancia = distancia;
-		this.email = email;
-	}
-	
-/*	public Rota(Long ID, String descricao, Double distancia, String email, List<Ponto> pontos) {
-		super();
-		this.ID = ID;
-		this.descricao = descricao;
-		this.distancia = distancia;
-		this.email = email;
-		this.pontos = pontos;
-	}
 */
+	
+	public Rota(String uid_User, String descricao, Double distancia) {
+		this.uid_User = uid_User;
+		this.descricao = descricao;
+		this.distancia = distancia;;
+	}
+	
 	public Rota() {
 		super();
 	}
 	
 	
-	public Long getID() {
+	public Integer getID() {
 		return ID;
 	}
-	public void setID(Long iD) {
+	public void setID(Integer iD) {
 		ID = iD;
 	}
 	public String getDescricao() {
@@ -69,29 +60,17 @@ public class Rota {
 	public void setDistancia(Double distancia) {
 		this.distancia = distancia;
 	}
-	public String getEmail() {
-		return email;
+	public String getUid_User() {
+		return uid_User;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUid_User(String uid_User) {
+		this.uid_User = uid_User;
 	}
-	
-	
-	public List<Ponto> getPontos() {
-		return pontos;
+	public String getProprietario() {
+		return proprietario;
 	}
-	public void setPontos(List<Ponto> pontos) {
-		this.pontos = pontos;
-	}
-
-	@Override
-	public String toString() {
-		return "Rota [ID=" + ID + ", descricao=" + descricao + ", email=" + email + ", distancia=" + distancia
-				+ "";
-	}
-	
-	public void addPonto(Ponto ponto) {
-		this.pontos.add(ponto);
+	public void setProprietario(String proprietario) {
+		this.proprietario = proprietario;
 	}
 	
 	

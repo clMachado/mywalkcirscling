@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,16 +22,18 @@ public class Usuario implements UserDetails {
 	private static final long serialVersionUID = -469759354805228603L;
 
 	@Id
-	@SequenceGenerator(name = "user_seq", sequenceName = "user_seq")
+	@SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize=1)
 	@GeneratedValue(generator = "user_seq", strategy = GenerationType.SEQUENCE)
 	private Long codigo;
+	
+	@NotEmpty
+	private String uuID;
 
 	@NotBlank
 	@NotNull
 	private String email;
-
-	@NotNull
-	@Column(length = 30, nullable = false)
+	
+	@NotEmpty
 	private String username;
 
 	@NotBlank
@@ -41,19 +44,29 @@ public class Usuario implements UserDetails {
 	@NotNull
 	@Column(length = 150, nullable = false)
 	private String nome;
-
+	
 	@ManyToMany
 	private Collection<Permissao> permissoes;
 	
 	
 	
-	
-	
-	
 
-	public Usuario(@NotBlank String email, String username, @NotBlank String password, String nome) {
+
+
+	public Usuario( @NotEmpty String uuID, @NotBlank @NotNull String email, @NotBlank @NotNull String password, @NotNull String nome, Collection<Permissao> permissoes) {
+		super();
+		this.uuID = uuID;
 		this.email = email;
-		this.username = username;
+		this.username = email;
+		this.password = password;
+		this.nome = nome;
+		this.permissoes = permissoes;
+	}
+	public Usuario( @NotEmpty String uuID, @NotBlank @NotNull String email, @NotBlank @NotNull String password, @NotNull String nome ) {
+		super();
+		this.uuID = uuID;
+		this.email = email;
+		this.username = email;
 		this.password = password;
 		this.nome = nome;
 	}
@@ -62,14 +75,11 @@ public class Usuario implements UserDetails {
 		super();
 	}
 
-
-
 	public void addPermissao(Permissao permissao) {
 		if (permissoes == null) {
 			permissoes = new HashSet<>(); // garante que nao se repita, nao tera
 											// 2 iguais
 		}
-
 		permissoes.add(permissao);
 	}
 
@@ -77,7 +87,6 @@ public class Usuario implements UserDetails {
 		if (permissoes != null) {
 			permissoes.remove(permissao);
 		}
-
 	}
 	
 	public Collection<Permissao> getPermissoes() {
@@ -88,79 +97,63 @@ public class Usuario implements UserDetails {
 		this.permissoes = permissoes;
 	}
 
-	
-	
 	public Long getCodigo() {
 		return codigo;
 	}
-
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
+		this.username = email;
 	}
+	public String getUuID() {
+		return uuID;
+	}
+	public void setUuID(String uuID) {
+		this.uuID = uuID;
+	}
+	
 
-	
-	
 	// medotos herdados da implementacao
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return permissoes; 
-							
+		return permissoes; 					
 	}
-
 	@Override
 	public boolean isAccountNonExpired() { // conta nao esta expirada ?
-		// TODO Auto-generated method stub
 		return true;
 	}
-
 	@Override
 	public boolean isAccountNonLocked() { // conta nao bloqueada?
-		// TODO Auto-generated method stub
 		return true;
 	}
-
 	@Override
 	public boolean isCredentialsNonExpired() { // senha nao espirada ?
-		// TODO Auto-generated method stub
 		return true;
 	}
-
 	@Override
 	public boolean isEnabled() { // usuario habilitado ?
-		// TODO Auto-generated method stub
 		return true;
+	}
+	@Override
+	public String getUsername() {
+		return username;
 	}
 
 }

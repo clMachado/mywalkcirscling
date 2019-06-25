@@ -8,15 +8,15 @@ import br.com.clmDeveloper.mywalkcircling.classes.Rota;
 
 
 @Repository
-public interface RotaRepository extends JpaRepository<Rota, Long>{
+public interface RotaRepository extends JpaRepository<Rota, Integer>{
 	
-	@Query("select r from Rota r where r.ID = ?1 and r.email = ?2")
-	Rota findRota(Long ID, String email);
+	//@Query("select r from Rota r where r.ID = ?1 and r.email = ?2")
+	//Rota findRota(Long ID, String email);
 	
-	@Query("select r from Rota r where r.email = ?1")
-	List<Rota> findAllRotas(String email);
+	//@Query("select r from Rota r where r.email = ?1")
+	//List<Rota> findAllRotas(String email);
 	
 	@Query("select r from Rota r where r.ID = ?1")
-	Rota findByID(Long id);
-
+	Rota findByID(Integer id);
+	
 }

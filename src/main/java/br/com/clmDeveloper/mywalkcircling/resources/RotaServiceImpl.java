@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.clmDeveloper.mywalkcircling.classes.ListRotas;
+
 import br.com.clmDeveloper.mywalkcircling.classes.Rota;
 import br.com.clmDeveloper.mywalkcircling.repository.PontoRepository;
 import br.com.clmDeveloper.mywalkcircling.repository.RotaRepository;
@@ -25,7 +25,7 @@ public class RotaServiceImpl implements RotaService{
 	
 	@Autowired
 	private PontoRepository pontoRepository;
-	
+	/*
 	private ListRotas listRotas;
 	
 	
@@ -135,5 +135,6 @@ public class RotaServiceImpl implements RotaService{
 		
 		return listRotas;
 	}
+	*/
 
 }
